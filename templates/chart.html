@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>El-dauysy</title>
+    <!--
+
+Template 2085 Neuron
+
+http://www.tooplate.com/view/2085-neuron
+
+-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lora|Merriweather:300,400"
+      rel="stylesheet"
+    />
+    <style>
+      .chart-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+      }
+      .chart-container img {
+        width: 600px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PRE LOADER -->
+
+    <div class="preloader">
+      <div class="sk-spinner sk-spinner-wordpress">
+        <span class="sk-inner-circle"></span>
+      </div>
+    </div>
+
+    <!-- Navigation section  -->
+
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="{% url 'index' %}" class="navbar-brand">El-dauysy</a>
+            </li>
+
+            <li class="active"><a href="{% url 'index' %}">El-dauysy</a></li>
+            <li><a href="{% url 'all_petition' %}">Барлық үндеулер</a></li>
+            {% if user.status == 'Народ' %}
+            <li><a href="{% url 'create_petition' %}">Үндеу құру</a></li>
+            <li><a href="{% url 'chart' %}">Үндеулердің өсімі</a></li>
+            {% endif %} {% if user.status == 'Чиновник' %}
+            <li><a href="{% url 'table_petit' %}">Тізім</a></li>
+            {% endif %} {% if smi %}
+            <li><a href="#">{{ smi }}</a></li>
+            {% endif %} {% if user.username %}
+            <li><a href="#">АЖ: {{ user.username }}</a></li>
+            {% endif %}
+            <li><a href="{% url 'logout_view' %}">Шығу</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-item">
+        <h2>Облыс бойынша үндеулер</h2>
+        <img src="{{ g.by_city.url }}" alt="Қаладағы петициялар" />
+      </div>
+      <div class="chart-item">
+        <h2>Үндеулерге жауаптар</h2>
+        <img src="{{ g.by_answer.url }}" alt="Үндеулерге жауаптар" />
+      </div>
+      <div class="chart-item">
+        <h2>Ай бойынша үндеулер</h2>
+        <img src="{{ g.by_month.url }}" alt="Айлар бойынша үндеулер" />
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-md-offset-1 col-sm-6">
+            <h3>El-Dauysy</h3>
+            <p>
+              "Маңызды бастамаларды қолдау үшін бізге қосылыңыз! Біз бірге
+              біздің болашағымыз үшін маңызды өзгерістер жасай аламыз.
+              Үндеуге бүгін қол қойып, біздің қозғалысқа қосылыңыз!"
+            </p>
+            <div class="footer-copyright">
+              <p>© 2024 El-dauysy &copy;Барлық құқықтар қорғалған</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-md-offset-1 col-sm-6">
+            <h3>Contacts</h3>
+            <p><i class="fa fa-globe"></i> Almaty</p>
+            <p><i class="fa fa-phone"></i> 010-010-010</p>
+            <p><i class="fa fa-save"></i> Telegram: @El-dauysy</p>
+          </div>
+
+          <div class="clearfix col-md-12 col-sm-12">
+            <hr />
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <ul class="social-icon">
+              <li><a href="#" class="fa fa-facebook"></a></li>
+              <li><a href="#" class="fa fa-twitter"></a></li>
+              <li><a href="#" class="fa fa-google-plus"></a></li>
+              <li><a href="#" class="fa fa-dribbble"></a></li>
+              <li><a href="#" class="fa fa-linkedin"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back top -->
+    <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+
+    <!-- SCRIPTS -->
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/particles.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/jquery.parallax.js' %}"></script>
+    <script src="{% static 'js/smoothscroll.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+  </body>
+</html>

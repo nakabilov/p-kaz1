@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap_pr.css' %}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+    <link href="{% static 'css/style_profile.css' %}" rel="stylesheet" />
+
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  
+
+  <title>Профиль</title>
+
+</head>
+<body class="sub_page">
+
+  <div class="hero_area">
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="">
+            <span>
+              El-Dauysy
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item ">
+                <a class="nav-link" href="{% url 'index' %}">Жаңалықтар<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'all_petition' %}">Барлық үндеулер</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'create_petition' %}">Үндеу құру</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'chart' %}">Үндеулердің өсімі</a>
+              </li>
+
+            
+            </ul>
+            <div class="quote_btn-container">
+              <a href="{% url 'logout_view' %}" class="quote_btn">
+                Шығу
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+
+    {% block content %}
+    {% endblock content %}
+
+  

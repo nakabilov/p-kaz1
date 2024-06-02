@@ -1,0 +1,11 @@
+beautifulsoup4==4.12.3
+celery==5.4.0
+certifi
+Django
+django-jazzmin
+djangorestframework
+matplotlib
+numpy
+pillow
+requests
+python-dotenv

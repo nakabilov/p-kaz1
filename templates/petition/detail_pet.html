@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Үндеу</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/detail_pet.css' %}">
+</head>
+
+<body>
+<div class="container emp-profile">
+    <div class="col-md-2">
+        <a href="{% url 'all_petition' %}">
+            <button type="button" class="profile-edit-btn">Артқа</button>
+        </a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                {% if petition.img %}
+                <div class="profile-img">
+                    <img src="{{ petition.img.url }}" alt="Фото">
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <b><h5>{{ petition.title }}</h5></b>
+                    <p class="proile-rating">Өтініш беруші: <span>{{ petition.author }}</span></p>
+                    <p class="proile-rating">Уақыты: <span>{{ petition.created_at }}</span></p>
+                    <p class="proile-rating">Дата Оканчания: <span>{{ petition.date_end }}</span></p>
+                    <p class="proile-rating">Қол қойылды: <span>{{ petition.signers }}</span></p>
+                    <p class="proile-rating">Қала: <span>{{ petition.author.city }}</span></p>
+                    <p class="proile-rating">Категория: <span>{{ petition.category }}</span></p>
+                    <p class="proile-rating">Статус: <span>{{ petition.status }}</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Сипаттама</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+              {% if user.status == 'Народ' %}
+              {% if is_signed %}
+              <a href="{% url 'create_signature' petition.id %}">
+                <button type="button" style="border-radius: 5%">Сіз қазірдің өзінде қол қойдыңыз</button>
+                </a>
+                {% else %}
+                <a href="{% url 'create_signature' petition.id %}">
+                    <button type="button" class="profile-edit-btn">Қол қою</button>
+                    </a>
+              {% endif %}
+                {% endif %}
+            </div>
+        </div>  
+        <div class="row">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{ petition.description }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+          {% if user.status == "Сми" %}
+          <a href="{% url 'create_news' petition.id  %}">
+            <button type="button" class="profile-edit-btn">Жаңалық құру</button>
+            </a>
+        {% endif %}
+        </div> 
+        <br>
+        {% if petition.file %}
+        <div class="col-md-2">
+          <a href="{{ petition.file.url }}" download class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
+            <button type="button" class="profile-edit-btn">Файлды жүктеу</button>
+            </a>
+          </div>
+          {% endif %}
+
+          <br>
+          <h3>Мемлекеттік орган</h3>
+          <hr>
+          {% for answer in petition.petition_answer.all %}
+          <h5>{{ answer.chinov.username }}</h5>
+          <p>{{ answer.text }}</p>
+          <hr>
+          {% endfor %}
+        </form>
+
+        <!-- Share Buttons -->
+        <div class="col-md-6">
+            <h4>Бөлісу:</h4>
+            <div class="share-buttons">
+                <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank">
+                    <button type="button" class="btn btn-success"><i class="fa fa-whatsapp"></i> WhatsApp</button>
+                </a>
+                <a href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ petition.title }}" target="_blank">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-telegram"></i> Telegram</button>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</button>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <button type="button" class="btn btn-danger"><i class="fa fa-instagram"></i> Instagram</button>
+                </a>                
+            </div>
+            <br>    
+            <div>
+                <button id="copyLinkButton" type="button" class="btn btn-info">Сілтемені көшіру</button>
+                <span id="copyLinkMessage" style="display: none;">Сілтеме алмасу буферіне көшірілді</span>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.parallax.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+<script>
+    document.getElementById('copyLinkButton').addEventListener('click', function() {
+        var text = "{{ request.build_absolute_uri }}";
+
+        navigator.clipboard.writeText(text).then(function() {
+            document.getElementById('copyLinkMessage').style.display = 'inline';
+            setTimeout(function() {
+                document.getElementById('copyLinkMessage').style.display = 'none';
+            }, 3000);  // Скрыть сообщение через 3 секунды
+        }).catch(function(err) {
+            console.error('Көшіруден қате: ', err);
+            // Обработка ошибки, если копирование не удалось
+            alert('Сілтемені көшіру сәтсіз аяқталды.');
+        });
+    });
+</script>
+</body>
+</html>

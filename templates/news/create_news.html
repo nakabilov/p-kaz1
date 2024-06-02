@@ -1,0 +1,192 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>Жаңалық құру</title>
+<!--
+
+Template 2085 Neuron
+
+http://www.tooplate.com/view/2085-neuron
+
+-->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+<!-- Main css -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Lora|Merriweather:300,400" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+<!-- Navigation section  -->
+
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+     <div class="container">
+
+          <div class="navbar-header">
+               <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+               </button>
+               <a href="{% url 'index' %}" class="navbar-brand">El-Dauysy</a>
+          </div>
+          <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="{% url 'index' %}">Басты бет</a></li>
+                    <li><a href="{% url 'all_petition' %}">Барлық үндеулер</a></li>
+                    {% if user.status == 'Народ' %}
+                    <li><a href="{% url 'create_petition' %}">Үндеу құру</a></li>
+                    {% endif %}
+                    {% if user.status == 'Чиновник' %}
+                    <li><a href="{% url 'table_petit' %}">Үндеулер</a></li>
+                    {% endif %}
+                    <li><p>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</p></li>
+                    <li><a href="{% url 'logout_view' %}">Шығу</a></li>
+               </ul>
+          </div>
+
+  </div>
+</div>
+
+<!-- Home Section -->
+
+<section id="home" class="main-contact parallax-section">
+     <div class="overlay"></div>
+     <div class="container">
+          <div class="row">
+
+               <div class="col-md-12 col-sm-12">
+                    <h1>Жаңалық құру </h1>
+               </div>
+
+          </div>
+     </div>
+</section>
+
+<!-- Contact Section -->
+
+<section id="contact">
+     <div class="container">
+          <div class="row">
+
+               <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <h2>Саламатсыз ба!</h2>
+                    <p>Үндеу құру үшін төмендегі өрістерді құрыңыз...</p>
+                
+                    <form action="{% url 'create_news' petition.id %}" method="post" enctype="multipart/form-data">
+                         {% csrf_token %}
+                        <div class="col-md-4 col-sm-4">
+                         <input name="title" type="text" class="form-control" id="title" placeholder="Тақырыбы" value="{{ petition.title }}">
+                    </div>
+                        
+                        
+                        <div class="col-md-12 col-sm-12">
+                         <textarea name="desc" rows="5" class="form-control" id="message" placeholder="Жаңалықты сипаттаңыз"></textarea>
+                         </div>
+                        
+                        <div class="col-md-12 col-sm-12">
+                         <p>Сізге көмектесетін немесе дәлел бола алатын фотосуреттер тіркеңіз</p>
+                         <input name="image" type="file" class="form-control" id="image" placeholder="Сурет" multiple required>
+                         </div>
+                     
+                     
+                        <!-- <div class="col-md-12 col-sm-12">
+                         
+                              <input name="file" type="file" class="form-control" id="document" placeholder="Документ">
+                        </div> -->
+                        <div class="col-md-3 col-sm-6">
+                            <input name="submit" type="submit" class="form-control btn btn-primary" id="submit" value="Жіберу">
+                        </div>
+                    </form>
+                </div>
+                
+          </div>
+     </div>
+</section>
+
+<!-- Footer Section -->
+
+<footer>
+     <div class="container">
+       <div class="row">
+         <div class="col-md-5 col-md-offset-1 col-sm-6">
+           <h3>El-Dauysy</h3>
+           <p>
+             "Маңызды бастамаларды қолдау үшін бізге қосылыңыз! Біз бірге
+             біздің болашағымыз үшін маңызды өзгерістер жасай аламыз.
+             Үндеуге бүгін қол қойып, біздің қозғалысқа қосылыңыз!"
+           </p>
+           <div class="footer-copyright">
+             <p>© 2024 El-dauysy &copy;Барлық құқықтар қорғалған</p>
+           </div>
+         </div>
+
+         <div class="col-md-4 col-md-offset-1 col-sm-6">
+           <h3>Contacts</h3>
+           <p><i class="fa fa-globe"></i> Almaty</p>
+           <p><i class="fa fa-phone"></i> 010-010-010</p>
+           <p><i class="fa fa-save"></i> Telegram: @El-dauysy</p>
+         </div>
+
+         <div class="clearfix col-md-12 col-sm-12">
+           <hr />
+         </div>
+
+         <div class="col-md-12 col-sm-12">
+           <ul class="social-icon">
+             <li><a href="#" class="fa fa-facebook"></a></li>
+             <li><a href="#" class="fa fa-twitter"></a></li>
+             <li><a href="#" class="fa fa-google-plus"></a></li>
+             <li><a href="#" class="fa fa-dribbble"></a></li>
+             <li><a href="#" class="fa fa-linkedin"></a></li>
+           </ul>
+         </div>
+       </div>
+     </div>
+   </footer>
+
+<!-- Back top -->
+<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+
+
+<script>
+     function addImageInput(event) {
+         event.preventDefault();
+     
+         var inputWrapper = document.createElement('div');
+         inputWrapper.classList.add('col-md-12', 'col-sm-12', 'image-input-wrapper');
+     
+         var input = document.createElement('input');
+         input.type = 'file';
+         input.name = 'img';
+         input.classList.add('form-control');
+         input.setAttribute('placeholder', 'Фото');
+         input.multiple = true;
+     
+         inputWrapper.appendChild(input);
+     
+         var addButton = document.querySelector('.btn-default');
+         addButton.parentNode.insertBefore(inputWrapper, addButton);
+     }
+     </script>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.parallax.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

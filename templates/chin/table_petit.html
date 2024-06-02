@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table_petit.css' %}">
+  </head>
+<body>
+  <header>
+    <a href="{% url 'index' %}" class="back-btn">Артқа</a>
+    <h2>Барлық үндеулер</h2>
+</header>
+
+  <div class="container">
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1">Id</div>
+          <div class="col col-2">Тақырыбы</div>
+          <div class="col col-3">Күйі</div>
+          <div class="col col-4">Құрылған уақыты</div>
+        </li>
+        {% for i in petitions %}
+        <li class="table-row">
+          <div class="col col-1" data-label="Job Id">{{ i.id }}</div>
+          <a href="{% url 'detail_petit' i.id %}"><div class="col col-2" data-label="Customer Name">{{ i.title | truncatechars:32 }}
+          </div></a>
+          <div class="col col-3" data-label="Amount">
+            {% if i.status == '1' %}
+                Новый
+            {% elif i.status == '2' %}
+                Проверен
+            {% elif i.status == '3' %}
+                Активный
+            {% else %}
+                Неизвестно
+            {% endif %}
+        </div>
+                <div class="col col-4" data-label="Payment Status">{{ i.created_at }}</div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+</body>
+</html>

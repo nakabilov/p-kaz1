@@ -1,0 +1,84 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div class="rt-container">
+        <div class="col-rt-12">
+            <div class="Scriptcontent">
+                <!-- Student Profile -->
+                <div class="student-profile py-4">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header bg-transparent text-center">
+                                            {% if user.people.image %}
+                                            <img class="profile_img" src="{{ user.people.image.url }}" alt="Фотки нет :(">
+                                            {% endif %}
+                                            <p class="mb-0">
+                                                <strong class="pr-1">Сурет:</strong>
+                                                <input type="file" name="image" value="{{ people.image.url }}">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header bg-transparent border-0">
+                                            <h3 class="mb-0">Профильді өңдеу</h3>
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td>
+                                                        <h5>Аты</h5>
+                                                        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5>Тегі</h5>
+                                                        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5>Әкесінің аты</h5>
+                                                        <input type="text" id="father_name" name="father_name" value="{{ profile.father_name }}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5>Ағымдағы құпия сөз</h5>
+                                                        <input type="password" id="current_password" name="current_password" placeholder="Ағымдағы құпия сөз">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h5>Жаңа құпия сөз</h5>
+                                                        <input type="password" id="new_password" name="new_password" placeholder="Жаңа құпия сөз">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="background-color: blue; border-color: blue;">
+                                        Сақтау
+                                    </button>
+                                    <a href="{% url 'auth' %}" class="btn btn-primary" style="background-color: red; border-color: red;">
+                                        Шығу
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

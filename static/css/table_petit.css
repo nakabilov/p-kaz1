@@ -1,0 +1,108 @@
+body {
+  font-family: 'lato', sans-serif;
+}
+header {
+  background-color: #007bff; /* Зеленый фон */
+  padding: 20px; /* Поля вокруг содержимого */
+  display: flex; /* Располагаем элементы внутри header в строку */
+  justify-content: space-between; /* Равномерно распределяем элементы по горизонтали */
+  align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+h2 {
+  margin: 0; /* Убираем отступы сверху и снизу */
+  font-size: 24px; /* Размер шрифта */
+  color: #fff; /* Белый цвет текста */
+}
+
+.back-btn {
+  padding: 10px 20px; /* Отступы внутри кнопки */
+  font-size: 16px; /* Размер шрифта кнопки */
+  background-color: #617181; /* Цвет фона кнопки */
+  color: #fff; /* Белый цвет текста кнопки */
+  border: none; /* Убираем границу */
+  border-radius: 5px; /* Скругляем углы */
+  text-decoration: none; /* Убираем подчеркивание */
+  cursor: pointer; /* Заменяем курсор на указатель */
+  transition: background-color 0.3s; /* Плавное изменение цвета фона */
+}
+
+
+
+
+.container {
+  width: 100%; /* Устанавливаем ширину 100% для полноэкранного отображения */
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.responsive-table {
+  list-style-type: none; 
+  padding: 50px; /* Отступ сверху */
+  border-collapse: collapse; /* Добавляем обводку таблице */
+}
+
+.responsive-table li {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  border: 1px solid #ddd; /* Добавляем обводку для строк таблицы */
+}
+
+.responsive-table .table-header {
+  background-color: #007bff; /* Зеленый цвет фона */
+  color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.responsive-table .table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table .col-1 {
+  flex-basis: 10%;
+}
+
+.responsive-table .col-2 {
+  flex-basis: 40%;
+}
+
+.responsive-table .col-3 {
+  flex-basis: 25%;
+}
+
+.responsive-table .col-4 {
+  flex-basis: 25%;
+}
+
+@media all and (max-width: 767px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  
+  .responsive-table li {
+    display: block;
+  }
+  
+  .responsive-table .col {
+    flex-basis: 100%;
+    display: flex;
+    padding: 10px 0;
+  }
+  
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}

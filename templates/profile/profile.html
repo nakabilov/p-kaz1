@@ -1,0 +1,97 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section>
+    <div class="rt-container">
+          <div class="col-rt-12">
+              <div class="Scriptcontent">
+              
+<!-- Student Profile -->
+<div class="student-profile py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-transparent text-center">
+                {% if user.people.image %}
+                    <img class="profile_img" src="{{ user.people.image.url }}" alt="profile picture">
+                {% else %}
+                    <img class="profile_img" src="{% static 'images/пет3.avif' %}" alt="Default profile picture">
+                {% endif %}
+            </div>
+        </div>
+        <a href="{% url 'edit_profile' %}"><button type="button" class="btn btn-primary" style="background-color: blue; border-color: blue;">
+          Профильді өңдеу
+      </button></a>
+      <p></p>
+      <a href="{% url 'change_password' %}"><button type="button" class="btn btn-primary" style="background-color: blue; border-color: blue;">
+        Құпия сөзді өзгерту
+    </button></a>
+      </div>
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i>Профиль туралы ақпарат</i></h3>
+          </div>
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr>
+                <th width="30%">Аты</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.first_name }}</td>
+              </tr>
+              <tr>
+                <th width="30%">Тегі</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.last_name }}</td>
+              </tr>
+              <tr>
+                <th width="30%">Әкесінің аты</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.father_name }}</td>
+              </tr>
+              <tr>
+                <th width="30%">ЖСН</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.iin }}</td>
+              </tr>
+              <tr>
+                <th width="30%">Email</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.email }}</td>
+              </tr>
+              <tr>
+              <tr>
+                <th width="30%">Тіркелген күні</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.date_joined }}</td>
+              </tr>
+              <tr>
+                <th width="30%">Қала</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.city.name }}</td>
+              </tr>
+              <tr>
+                <th width="30%">Үндеу</th>
+                <td width="2%">:</td>
+                <td>{{ user.people.count_petitions }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+          <!-- <div style="height: 26px"></div>
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Обо мне </h3>
+          </div> -->
+          <!-- <div class="card-body pt-0">
+              <p>{{ user.profile.about_me }}</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

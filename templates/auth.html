@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Тіркелу / Кіру беті</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true" />
+      <div class="signup">
+        <form action="{% url 'auth' %}" method="POST">
+          {% csrf_token %}
+          <label for="chk" aria-hidden="true">Тіркелу</label>
+          {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+            <div class="message">{{ message }}</div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <input
+            type="text"
+            name="first_name"
+            placeholder="Аты"
+            required=""
+          />
+          <input
+          type="text"
+          name="last_name"
+          placeholder="Тегі"
+          required=""
+        />
+        <input
+        type="text"
+        name="father_name"
+        placeholder="Әкесінің аты"
+        required=""
+        />
+          <input
+            type="email"
+            name="email"
+            placeholder="Электрондық мекен-жай "
+            required=""
+          />
+          <input type="text" name="iin" placeholder="ЖСН" required="" />
+          <div class="centered-select">
+            <select name="city" required="">
+              <option value="" disabled selected>Облысты таңдаңыз</option>
+              {% for c in city %}
+              <option value="{{ c.id }}">{{ c.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="Құпия-сөз"
+            required=""
+          />
+          <input
+          type="password"
+          name="password2"
+          placeholder="Құпия-сөзді қайталау"
+          required=""
+        />
+          <button type="submit">Тіркелу</button>
+        </form>
+      </div>
+      <div class="login">
+        <form action="{% url 'logins' %}" method="POST">
+          {% csrf_token %}
+          <label for="chk" aria-hidden="true">Кіру</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Электрондық мекен-жай"
+            required=""
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Құпия-сөз"
+            required=""
+          />
+          <a href="{% url 'reset_password' %}"><p>Құпия сөзді ұмыттыңыз ба</p></a>
+          <a href="{% url 'index' %}"><button>Кіру</button></a>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
